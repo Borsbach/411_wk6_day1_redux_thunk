@@ -1,24 +1,26 @@
 import React from 'react'
-import { MoreVert } from '@material-ui/icons'
 import { Button, Table, TableHead, TableBody, TableRow, TableCell, Container } from '@material-ui/core'
-import Menu from './Menu'
+import Menu from '../containers/Menu'
 
 const Import = (props) => {
   // fill out this component
   
   return (
-    // <p>Import Component</p>
     <Container>
+      <br />
       <Button 
       variant='contained' 
       color='primary' 
       onClick={props.fetchMakes}
       >Import</Button>
+      <br />
+      <h2>COUNT: {props.makes.length}</h2>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>Id</TableCell>
               <TableCell>Make</TableCell>
+              <TableCell>Type</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -29,8 +31,10 @@ const Import = (props) => {
                 {make.MakeId}
               </TableCell>
               <TableCell>{make['MakeName']}</TableCell>
+              <TableCell>{make['VehicleTypeName']}</TableCell>
               <TableCell>
-                <Menu></Menu></TableCell>
+                <Menu index={index}/>
+              </TableCell>
             </TableRow>
           ))}
           </TableBody>

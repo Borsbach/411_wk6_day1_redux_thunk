@@ -1,11 +1,18 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import { MoreVert } from '@material-ui/icons'
+import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { MoreVert } from "@material-ui/icons";
+import { Container } from "@material-ui/core";
 
 export default function SimpleMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleDelete = index => {
+    console.log("INDEX", index);
+    props.deleteMake(index);
+    setAnchorEl(null);
+  };
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -16,8 +23,12 @@ export default function SimpleMenu(props) {
   };
 
   return (
-    <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+    <Container>
+      <Button
+        aria-controls="simple-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
         <MoreVert />
       </Button>
       <Menu
@@ -27,10 +38,8 @@ export default function SimpleMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick= {props.deleteMake}>Delete</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={() => handleDelete(props.index)}>Delete</MenuItem>
       </Menu>
-    </div>
+    </Container>
   );
 }
